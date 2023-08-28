@@ -1,59 +1,79 @@
-import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { connect } from 'react-redux';
-import { addItem } from '../Redux/actions';
+import { connect, ConnectedProps, useDispatch  } from 'react-redux';
+import { addWinner } from '../Redux/actions';
+import { RootState } from '../Redux/reducer';
 
-const InputScreen = ({ navigation, addItem }:any) => {
+const mapState = (state: RootState) => ({
+    winners: state.winners,
+});
 
-    const [text1, setText1] = useState('');
-    const [text2, setText2] = useState('');
+const mapDispatch = {
+    addWinner: (name: string) => addWinner(name),
+};
 
-    const handleAddItem = () => {
-        const newItem = { id:Date.now(), text1, text2};
-        addItem(newItem);
-        setText1('');
-        setText2(''),
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const InputScreen = ({ navigation }: any, props: PropsFromRedux) => {
+
+    const dispatch = useDispatch();
+
+    const [winner1, setWinner1] = useState('');
+    const [winner2, setWinner2] = useState('');
+
+    const handleAddWinners = () => {
+        dispatch(addWinner([winner1, winner2]));
+        // props.addWinner(winner1);
+        // props.addWinner(winner2);
         navigation.navigate('Display')
-
     };
+
     return (
-        <View style={{ paddingTop: 50, paddingHorizontal: 20 }}>
-            <Text style={{ color: 'black', fontSize: 40, fontWeight: 'bold' }}>Players</Text>
+        <View style={styles.container}>
+            <Text style={styles.header}>Players</Text>
             <View style={{ marginVertical: 20 }}>
                 <Text style={styles.label}>Player 1</Text>
                 <View
                     style={[styles.inputContainer, { borderColor: 'black', alignItems: 'center' }]}>
                     <TextInput
                         style={{ flex: 1 }}
-                        value={text1}
-                        onChangeText={(e)=>setText1(e)}
+                        onChangeText={(e) => setWinner1(e)}
+                        value={winner1}
                         placeholder="Ex. Tony Stark"
                     />
                 </View>
                 <Text style={styles.label}>Player 2</Text>
-                <View style={[styles.inputContainer, { borderColor: 'black', alignItems: 'center', }]}>
+                <View style={[styles.inputContainer, { borderColor: 'black', alignItems: 'center' }]}>
                     <TextInput
                         style={{ flex: 1 }}
-                        value={text2}
-                        onChangeText={(e)=>setText2(e)}
-                        placeholder="Ex. Chris hemsworth"
+                        onChangeText={(e) => setWinner2(e)}
+                        value={winner2}
+                        placeholder="Ex. Chris Hemsworth"
                     />
                 </View>
                 <TouchableOpacity
-                    onPress={handleAddItem}
+                    onPress={handleAddWinners}
                     activeOpacity={0.7}
                     style={styles.button}>
                     <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>Continue</Text>
                 </TouchableOpacity>
-
             </View>
         </View>
     )
 }
 
-export default connect(null, { addItem })(InputScreen);
-
 const styles = StyleSheet.create({
+    container: {
+        paddingTop: 50,
+        paddingHorizontal: 20
+    },
+    header: {
+        color: 'black',
+        fontSize: 40,
+        fontWeight: 'bold'
+    },
     label: {
         color: 'black',
         fontSize: 18,
@@ -77,3 +97,5 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
 })
+
+export default connector(InputScreen);
