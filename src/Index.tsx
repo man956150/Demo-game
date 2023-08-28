@@ -15,26 +15,3 @@ const Index = () => {
 };
 
 export default Index;
-
-// import React from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import InputScreen from './Screens/InputScreen';
-// import SaveScreen from './Screens/SaveScreen';
-
-
-// const Stack = createNativeStackNavigator();
-
-// const Index = () => {
-
-//   return (
-//     <NavigationContainer>
-//           <Stack.Navigator screenOptions={{headerShown: false}}>
-//             <Stack.Screen name="RegistrationScreen" component={InputScreen} />
-//             <Stack.Screen name="LoginScreen" component={SaveScreen} />
-//           </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
-
-// export default Index;
