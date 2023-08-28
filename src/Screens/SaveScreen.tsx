@@ -38,7 +38,7 @@ const SaveScreen = (props: PropsFromRedux) => {
     <ScrollView>
       <View>
         {/* Player Winner Points */}
-        {props.winners.map((winner, index) => (
+        {props.winners.map((winner:any, index:any) => (
           <View key={winner} style={styles.topContain}>
             <View style={styles.topContainer}>
               <Text style={styles.playerName}>{winner}</Text>

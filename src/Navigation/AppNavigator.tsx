@@ -1,13 +1,12 @@
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import AddItemScreen from '../Screens/InputScreen';
-import DisplayItemsScreen from '../Screens/SaveScreen';
-
+import WinnerInputScreen  from '../Screens/InputScreen';
+import SaveScreen from '../Screens/SaveScreen';
 const AppNavigator = createStackNavigator(
   {
-    Add: AddItemScreen,
-    Display: DisplayItemsScreen,
+    Add: WinnerInputScreen,
+    Display: SaveScreen,
   },
   { 
     headerMode: 'none',
@@ -17,5 +16,4 @@ const AppNavigator = createStackNavigator(
     initialRouteName: 'Add',
   }
 );
-
 export default createAppContainer(AppNavigator);
