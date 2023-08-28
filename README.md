@@ -1,13 +1,20 @@
 # Getting Started
 
-## Step 1: Start the Metro Server
+## Step 1: Install node_modules
+
+```bash
+# using npm
+npm install
+```
+
+## Step 2: Start the Metro Server
 
 ```bash
 # using npm
 npm start
 ```
 
-## Step 2: Start your Application
+## Step 3: Start your Application
 
 I have window pc so this project will run in android
 
@@ -19,7 +26,7 @@ npx react-native run-android
 
 ```
 
-### Now what?
+### Optional
 
 Here we can use linter using ESlint
 
